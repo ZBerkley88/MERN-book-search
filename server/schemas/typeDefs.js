@@ -6,7 +6,7 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
-    savedBooks [String]
+    savedBooks: [String]
   }
 
 
@@ -15,7 +15,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    
+
   }
 `;
 
