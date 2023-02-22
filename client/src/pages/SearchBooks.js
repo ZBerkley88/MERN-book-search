@@ -8,7 +8,7 @@ import {
   Row
 } from 'react-bootstrap';
 
-import Auth from '../old-utils/auth';
+import Auth from '../utils/auth';
 import { saveBook, searchGoogleBooks } from '../old-utils/API';
 import { saveBookIds, getSavedBookIds } from '../old-utils/localStorage';
 

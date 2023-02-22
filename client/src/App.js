@@ -1,14 +1,14 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // initialize an ApolloClient instance by importing the symbols we need from @apollo/client
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
-import SearchBooks from './pages/SearchBooks';
-import SavedBooks from './pages/SavedBooks';
-import Navbar from './components/Navbar';
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import SearchBooks from "./pages/SearchBooks";
+import SavedBooks from "./pages/SavedBooks";
+import Navbar from "./components/Navbar";
 
 const client = new ApolloClient({
-  uri: '/googlebooks',
+  uri: "/graphql",
   cache: new InMemoryCache(),
 });
 
@@ -16,17 +16,21 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-          <Navbar />
-          {/* <Switch>
-            <Route exact path='/' component={SearchBooks} />
+        <Navbar />
 
-            <Route exact path='/saved' component={SavedBooks} />
+        <Switch>
+          <Route exact path="/" component={SearchBooks} />
+          <Route exact path="/saved" component={SavedBooks} />
+          <Route render={() => <h1 className="display-2">Wrong page!</h1>} />
+        </Switch>
 
-            <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
+        {/* <Switch>
+          <Route exact path='/' element={<SearchBooks />} />
+          <Route exact path='/saved' element={<SavedBooks />} />
+          <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
           </Switch> */}
       </Router>
     </ApolloProvider>
-
   );
 }
 
