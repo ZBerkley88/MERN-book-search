@@ -42,7 +42,7 @@ const resolvers = {
       }
     );
   },
-  removeBook: async (parent, { userId, book }) => {
+  deleteBook: async (parent, { userId, book }) => {
     return User.findOneAndUpdate(
       { _id: userId },
       { $pull: { savedBooks: book }},
