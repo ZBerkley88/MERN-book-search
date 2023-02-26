@@ -8,6 +8,15 @@ const resolvers = {
       return User.find({});
     },
   },
+  me: async (parent, args, context) => {
+    if (context.user) {
+      const userData = await User.findOne({ _id: context.user._id }).select(
+        "-__v -password"
+      );
+      return userData;
+    }
+    throw new AuthenticationError("Not logged in");
+  },
   Mutation: {
     createUser: async (parent, args) => {
       const user = await User.create(args);
@@ -45,7 +54,7 @@ const resolvers = {
   deleteBook: async (parent, { userId, book }) => {
     return User.findOneAndUpdate(
       { _id: userId },
-      { $pull: { savedBooks: book }},
+      { $pull: { savedBooks: book } },
       { new: true }
     );
   },
